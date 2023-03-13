@@ -1,0 +1,21 @@
+name: Get Wiki
+
+on:
+  workflow_dispatch:
+
+jobs:
+  scraperwiki:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.10' 
+        - run: pip install requests beautifulsoup4
+        - run: python main.py
+        - run:
+              git config --global user.email "charleslomboni@gmail.com"
+              git config --global user.name "charleslomboni"
+              git add .
+              git commit -m "Automated Update"
+              git push
